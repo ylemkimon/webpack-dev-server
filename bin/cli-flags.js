@@ -131,6 +131,7 @@ module.exports = {
       name: 'host',
       type: String,
       describe: 'The hostname/ip address the server will bind to',
+      defaultValue: '0.0.0.0',
       group: CONNECTION_GROUP,
     },
     {

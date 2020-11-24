@@ -121,7 +121,7 @@ runCLITest('CLI', () => {
   it('unspecified port', (done) => {
     testBin('')
       .then((output) => {
-        expect(/http:\/\/localhost:[0-9]+/.test(output.stderr)).toEqual(true);
+        expect(/http:\/\/0.0.0.0:[0-9]+/.test(output.stderr)).toEqual(true);
         done();
       })
       .catch(done);
@@ -251,7 +251,7 @@ runCLITest('CLI', () => {
 
     cp.stderr.on('data', (data) => {
       const bits = data.toString();
-      const portMatch = /Project is running at http:\/\/localhost:(\d*)\//.exec(
+      const portMatch = /Project is running at http:\/\/0.0.0.0:(\d*)\//.exec(
         bits
       );
 
@@ -267,7 +267,7 @@ runCLITest('CLI', () => {
 
     cp2.stderr.on('data', (data) => {
       const bits = data.toString();
-      const portMatch = /Project is running at http:\/\/localhost:(\d*)\//.exec(
+      const portMatch = /Project is running at http:\/\/0.0.0.0:(\d*)\//.exec(
         bits
       );
 

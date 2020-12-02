@@ -143,14 +143,15 @@ runCLITest('CLI', () => {
   });
 
   // TODO search way how to tests it on github actions
-  it.skip('--host :: (IPv6)', (done) => {
+  it('--host :: (IPv6)', (done) => {
     testBin('--host ::')
       .then((output) => {
-        const localIP = internalIp.v4.sync();
+        const localIP = internalIp.v6.sync();
 
+        console.log(output.stderr);
         expect(/http:\/\/localhost:[0-9]+/.test(output.stderr)).toEqual(true);
         expect(
-          new RegExp(`http://${localIP}:[0-9]+/`).test(output.stderr)
+          new RegExp(`http://\[${localIP}\]:[0-9]+/`).test(output.stderr)
         ).toEqual(true);
         done();
       })
@@ -279,7 +280,7 @@ runCLITest('CLI', () => {
 
   // TODO: do not skip after @webpack-cli/serve passes null port by default
   // https://github.com/webpack/webpack-cli/pull/2126
-  it.skip('should use different random port when multiple instances are started on different processes', (done) => {
+  it.skip'should use different random port when multiple instances are started on different processes', (done) => {
     const cliPath = resolve(__dirname, '../../bin/webpack-dev-server.js');
     const cwd = resolve(__dirname, '../fixtures/cli');
 
